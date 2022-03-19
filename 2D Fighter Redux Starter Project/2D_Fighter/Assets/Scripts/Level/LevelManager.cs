@@ -10,7 +10,7 @@ public class LevelManager : MonoBehaviour
     public Transform[] spawnPositions;
 
     CameraManager camM;
-    CharacterManager charM;
+    public CharacterManager charM;
     LevelUI levelUI;
 
     public int maxTurns = 2;

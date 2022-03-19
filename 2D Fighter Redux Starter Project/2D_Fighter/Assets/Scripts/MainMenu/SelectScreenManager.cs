@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -29,6 +30,7 @@ public class SelectScreenManager : MonoBehaviour
     public Text player2;
     public AudioSource ad;
     public AudioClip updown;
+    public Text highscoreTxt;
     #region Singleton
 
     public static SelectScreenManager instance;
@@ -53,6 +55,15 @@ public class SelectScreenManager : MonoBehaviour
         charManager.solo = (numberOfPlayers == 1);
         if (charManager.solo)
             player2.gameObject.SetActive(false);
+
+        string path = Application.persistentDataPath + "/savefile.json";
+        if (File.Exists(path))
+        {
+            string json = File.ReadAllText(path);
+            PlayerBase data = JsonUtility.FromJson<PlayerBase>(json);
+
+            highscoreTxt.text = data.score.ToString();
+        }
     }
     void CreatePotraits()
     {
